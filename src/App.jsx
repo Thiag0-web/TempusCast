@@ -5,7 +5,7 @@ const WeatherApp = () => {
   const [city, setCity] = useState('');
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-blue-400 to-indigo-600 flex items-center justify-center p-4 font-sans">
+    <div className="min-h-screen bg-gradient-to-br from-blue-400 to-indigo-600 flex items-center justify-center p-4 font-sans">
       {/* Container Principal com Efeito de Vidro */}
       <div className="bg-white/20 backdrop-blur-lg rounded-3xl p-8 shadow-2xl w-full max-w-md border border-white/30 text-white">
         
