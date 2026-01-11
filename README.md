@@ -1,16 +1,36 @@
-# React + Vite
+🌤️ TempusCast
+TempusCast é uma aplicação de previsão do tempo minimalista e elegante, construída para oferecer uma experiência visual fluida enquanto fornece dados climáticos precisos em tempo real. O projeto utiliza a estética Glassmorphism, destacando-se pelo uso de transparências e desfoques modernos.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+✨ Funcionalidades
+🔍 Busca Inteligente: Localize o clima de qualquer cidade instantaneamente.
+🧊 Design Glassmorphism: Interface baseada em camadas de vidro, otimizada para uma experiência visual limpa.
+🔄 Status Dinâmico: Texto informativo que orienta o usuário (Aguardando busca, Carregando ou Exibindo resultados).
+📱 Totalmente Responsivo: Design adaptável que garante usabilidade em dispositivos móveis e desktop.
+🌡️ Dados Detalhados: Além da temperatura, exibe umidade, velocidade do vento, sensação térmica e descrição do céu em português.
+🛠️ Tratamento de Exceções: Sistema de erro amigável para cidades não encontradas ou falhas de conexão.
+🛠️ Tecnologias e Ferramentas
+React.js: Biblioteca principal para construção da interface componentizada.
 
-Currently, two official plugins are available:
+Tailwind CSS: Framework utilitário para estilização e responsividade.
+Lucide React: Pacote de ícones minimalistas.
+API wttr.in: Motor de busca de dados meteorológicos via JSON.
+JavaScript (ES6+): Lógica assíncrona com Async/Await e manipulação de estados.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🚀 Como testar localmente
+Bash
+# 1. Clone este repositório
+git clone https://github.com/seu-usuario/tempuscast.git
+# 2. Acesse a pasta do projeto
+cd tempuscast
+# 3. Instale as dependências
+npm install
+# 4. Inicie o projeto
+npm run dev
+A aplicação estará disponível em http://localhost:5173.
 
-## React Compiler
+📈 Evolução do Projeto
+O TempusCast foi desenvolvido como um projeto de estudo focado em:
+App de clima minimalista em React focado no domínio de APIs REST, estados assíncronos
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+👤 Autor
+Desenvolvido por Thiag0-web 📫 Vamos nos conectar?
