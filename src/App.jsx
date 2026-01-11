@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Search, MapPin, Wind, Droplets, Thermometer } from 'lucide-react';
+import Loader from './components/Loader/Loader';
 
 const WeatherApp = () => {
   const [city, setCity] = useState('');
@@ -13,9 +14,7 @@ const WeatherApp = () => {
     setLoading(true);
     setError('');
     try {
-      const res = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${cidade}&units=metric&lang=pt_br&appid=${}`
-      );
+      const res = await fetch(`https://wttr.in/${cidade}?format=j1`);
       if (!res.ok) throw new Error('Cidade não encontrada');
       const data = await res.json();
       setWeather(data);
@@ -35,7 +34,7 @@ const WeatherApp = () => {
   return (
     <div className="min-h-screen bg-linear-to-br from-blue-400 to-indigo-600 flex items-center justify-center p-4 font-sans">
       <div className="bg-white/20 backdrop-blur-lg rounded-3xl p-8 shadow-2xl w-full max-w-md border border-white/30 text-white">
-        
+
         {/* Barra de Busca */}
         <form onSubmit={handleSearch} className="relative mb-8">
           <input
@@ -48,7 +47,12 @@ const WeatherApp = () => {
           <Search className="absolute left-4 top-3.5 text-white/70" size={20} />
         </form>
 
-        {loading && <p className="text-center text-white/80">Carregando...</p>}
+        {loading && (
+          <div className="flex justify-center">
+            <Loader />
+          </div>
+        )}
+
         {error && <p className="text-center text-red-400">{error}</p>}
 
         {weather && (
@@ -57,24 +61,31 @@ const WeatherApp = () => {
             <div className="text-center mb-10">
               <div className="flex items-center justify-center gap-2 mb-2">
                 <MapPin size={20} className="text-blue-200" />
-                <h1 className="text-3xl font-bold tracking-wide">{weather.name}</h1>
+                <h1 className="text-3xl font-bold tracking-wide">
+                  {weather.nearest_area[0].areaName[0].value}
+                </h1>
               </div>
+
               <p className="text-blue-100 opacity-80 uppercase tracking-widest text-sm">
-                {new Date(weather.dt * 1000).toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' })}
+                {new Date().toLocaleDateString('pt-BR', {
+                  weekday: 'long',
+                  day: 'numeric',
+                  month: 'long',
+                })}
               </p>
-              
+
               <div className="mt-6 flex flex-col items-center relative">
                 <div className="w-32 h-32 bg-yellow-300 rounded-full blur-2xl absolute opacity-20 animate-pulse"></div>
-                <img 
-                  src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@4x.png`} 
-                  alt={weather.weather[0].description} 
-                  className="w-32 h-32 relative z-10"
-                />
+
+                {/* Ícone ilustrativo (wttr não fornece ícones padronizados) */}
+                <Thermometer size={96} className="relative z-10 text-yellow-300" />
+
                 <span className="text-7xl font-extrabold mt-2 tracking-tighter">
-                  {Math.round(weather.main.temp)}°C
+                  {weather.current_condition[0].temp_C}°C
                 </span>
+
                 <span className="text-xl font-medium text-blue-100 mt-1">
-                  {weather.weather[0].description}
+                  {weather.current_condition[0].lang_pt[0].value}
                 </span>
               </div>
             </div>
@@ -85,23 +96,19 @@ const WeatherApp = () => {
                 <Droplets className="text-blue-300" />
                 <div>
                   <p className="text-xs text-blue-200 uppercase">Umidade</p>
-                  <p className="font-bold text-lg">{weather.main.humidity}%</p>
+                  <p className="font-bold text-lg">
+                    {weather.current_condition[0].humidity}%
+                  </p>
                 </div>
               </div>
-              
+
               <div className="bg-white/10 p-4 rounded-2xl flex items-center gap-3 border border-white/10">
                 <Wind className="text-blue-300" />
                 <div>
                   <p className="text-xs text-blue-200 uppercase">Vento</p>
-                  <p className="font-bold text-lg">{weather.wind.speed} km/h</p>
-                </div>
-              </div>
-
-              <div className="bg-white/10 p-4 rounded-2xl flex items-center gap-3 border border-white/10 col-span-2">
-                <Thermometer className="text-blue-300" />
-                <div>
-                  <p className="text-xs text-blue-200 uppercase">Sensação Térmica</p>
-                  <p className="font-bold text-lg">{Math.round(weather.main.feels_like)}°C</p>
+                  <p className="font-bold text-lg">
+                    {weather.current_condition[0].windspeedKmph} km/h
+                  </p>
                 </div>
               </div>
             </div>
